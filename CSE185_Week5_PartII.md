@@ -66,7 +66,7 @@ Note, these SNPs are sorted by genomic coordinate, so are not in the same order 
 
 ## 6. Eye color prediction
 
-Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script.  *Hint*: Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in Excel. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or in this case, spreadsheets) to your Github repository.
+Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script. Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in a spreadsheet. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or spreadsheets) to your Github repository.
 
 For each sample, you should report p(brown), p(blue), and p(other), in addition to a prediction based on what eye color has highest probability for that sample. Include a table of results as a *supplementary file* that you reference from your lab report (do not include the table directly in the report!).
 
@@ -76,7 +76,7 @@ It turns out our sample has a mixture of individuals from two population groups.
 
 Population labels for each sample are given in `public/week5/ceu_tsi_population_labels.txt`.
 
- Calculate the mean probability of blue, brown, or other colored eyes for each population, CEU and TSI. Which group is more likely to have blue eyes? Does this match with what is known about eye color frequencies in those populations?
+Calculate the mean probability of blue, brown, or other colored eyes for each population, CEU and TSI. Which group is more likely to have blue eyes? Does this match with what is known about eye color frequencies in those populations? (Note, not all of these samples has genotyopes, so don't worry if some data is missing).
 
 ## 8. Variant interpretation
 
@@ -95,5 +95,6 @@ Based on the fact that each child will inherit one allele from mom and one from 
 
 
 ## 10. For your lab report
+Similar to last week, the lab report document contains specific prompts that should be answered.
 
 **Congrats, you made it to the end of lab 5! This will be our last full lab report before the final project. Next week's lab will just require answering a series of questions to give you a break before we head into final project mode.**
