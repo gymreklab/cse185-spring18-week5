@@ -43,7 +43,7 @@ plink \
     --out ${OUTRPREFIX}
 ```
 
-This will create an output file ${OUTPREFIX}.eigenvec, with the value along each principal component for each sample. Make a scatter plot of PC1 vs. PC2. Do you see any distinct clusters of samples? What do you think those clusters correspond to?
+This will create an output file `${OUTPREFIX}.eigenvec`, with the value along each principle component for each sample. Make a scatter plot of PC1 vs. PC2. Do you see any distinct clusters of samples? What do you think those clusters correspond to?
 
 ## 2. Performing a basic GWAS
 
@@ -60,7 +60,7 @@ Note you'll have to fill in absolute paths.
 
 Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different $OUTPREFIX each time so you don't overwrite the original results.
 
-These commands will create an output file $OUTPREFIX.assoc.logistic. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column.
+These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column.
 
 In each case, how many variants pass genome-wide significance of p<5*10**-8? Did you get more or fewer significant variants after controlling for covariates?
 
@@ -100,10 +100,4 @@ Previously, the following SNPs have been associated with eye color:
 
 Do any of these show up in your results? If not, discuss in your lab report why you might not have been able to identify them. We'll use this set of SNPs on Thursday to predict eye color in samples where the answer is unknown.
 
-**That's it for today. Next time, we'll use GWAS hits to predict eye color in an independent sample of individuals.**
-
-
-TODO:
-remove "other" eye color
-use more pop groups here so the PCA is pretty?
-pull out two more population groups for next part
+**That's it for today. Next time, we'll use GWAS hits to *predict* eye color given an individual's genotypes!**
