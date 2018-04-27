@@ -67,7 +67,7 @@ These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [
 cat $OUTPREFIX.assoc.logistic | awk '($5=="ADD")' > $OUTPREFIX.assoc.logistic.no_covars
 ```
 
-In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</supp>? Did you get more or fewer significant variants after controlling for covariates?
+In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</sup>? Did you get more or fewer significant variants after controlling for covariates?
 
 ## 3. Visualizing GWAS results
 Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A partial script for plotting has been provided in `scripts/gwas_plotter.py`. Modify this script as indicated and use it to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Include the figures in your lab report.
