@@ -33,6 +33,7 @@ You may have 2-3 paragraphs max for each. Make sure each figure is clearly refer
 ### Topic 1 (? pt)
 
 ## Discussion (2 pts)
+* Did you identify all the known SNPs contributing to eye color? If not, why do you think you might have missed them?
 
 ## Citations (1 pt)
 Include at least one citation

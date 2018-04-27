@@ -1,7 +1,7 @@
 # Week 5: What color should my eyes be?  (part 1)
 Skills covered: GWAS, plink, plotting
 
-The goal of this week's lab is to determine the genetic basis of eye color. This week we'll have fewer tasks to complete for the lab, but less of the code for each section will be provided. Also, we're assuming you're now comfortable with the process of cloning and updating your `git` repository, so those commands won't be given anymore unless we're doing something new.
+The goal of this week's lab is to determine the genetic basis of eye color.
 
 Today, you'll perform a genome-wide association study (GWAS) for samples with blue vs. brown eyes. Thursday, you'll implement a program to predict eye color from a handful of SNPs. Note: if you have done 23andMe, you can even do Part II on your own genome to predict what color your own eyes should be, and see how close that prediction is to reality! 
 
@@ -31,7 +31,19 @@ Take a look at our dataset. Record:
 Record the commands you used to determine this in your lab notebook. Note the results in the methods section of your lab report.
 
 ## 1. Analyzing population structure
-Pop structure PCA and plot
+
+It turns out our sample was collected from individuals with quite different ethnic backgrounds. For example, some are European, others are Asian, and some are African. As we will learn in class on Wednesday, using such a heterogenous sample may introduce spurious signals in our GWAS. We'd like to control for population structure in our cohort. For this, we'll use something called Principle Component Analysis (PCA). PCA looks for groups of features (in this case, SNPs) that explain the most variation in our data. You can think of it as clustering our samples based on their ancestry. We'll use the results of this clustering as covariates in our GWAS. If this is confusing, revisit this section after Wednesday's lecture!
+
+We can use `plink` to calculate principle components in our sample:
+
+```
+plink \
+    --file ${PREFIX} \
+    --pca 10 \
+    --out ${OUTRPREFIX}
+```
+
+This will create an output file ${OUTPREFIX}.eigenvec, with the value along each principal component for each sample. Make a scatter plot of PC1 vs. PC2. Do you see any distinct clusters of samples? What do you think those clusters correspond to?
 
 ## 2. Performing a basic GWAS
 
@@ -53,12 +65,11 @@ These commands will create an output file $OUTPREFIX.assoc.logistic. See the [pl
 In each case, how many variants pass genome-wide significance of p<5*10**-8? Did you get more or fewer significant variants after controlling for covariates?
 
 ## 3. Visualizing GWAS results
-QQ plot
-manhattan plot
+Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A partial script for plotting has been provided in `scripts/gwas_plotter.py`. Modify this script as indicated and use it to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Include the figures in your lab report.
+
+How did the two results differ? Which GWAS do you think is more reliable?
 
 ## 4. Analyzing significant hits
-clump with plink
-compare with irisplex snps
 
 You will notice some "high rises" in your Manhattan plot. As we discussed in class, it is unlikely that every variant in that spike is independently associated with eye color. It is far more likely that each spike represents a single causal variant which is correlated with a lot of nearby variants that are actually not contributing at all. We can use `plink` to "clump" variants into likely independent signals:
 
