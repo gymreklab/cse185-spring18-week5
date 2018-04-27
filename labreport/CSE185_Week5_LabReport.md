@@ -35,11 +35,13 @@ You may have 2-3 paragraphs max for each. Make sure each figure is clearly refer
 
 ### Eye color prediction (1 pt)
 * Include and reference a supplementary table of results with eye color predictions for each sample
+* Include at least one genome browser screenshot of one of the six eye color SNPs and your interpretation of how that SNP might be affecting eye color.
 
 ### Topic 1 (? pt)
 
 ## Discussion (2 pts)
 * Did you identify all the known SNPs contributing to eye color? If not, why do you think you might have missed them?
+* Hypothesize how the 6 SNPs used in Part II might be affecting eye color. 
 
 ## Citations (1 pt)
 Include at least one citation
