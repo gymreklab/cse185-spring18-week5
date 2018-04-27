@@ -29,7 +29,15 @@ Below is a reproduced table of the model parameters from the 6 predictive SNPs, 
 | 11 | 89011046 | rs1393350 | A |
 | 6 | 396321 | rs12203592 | T |
 
-For example, TODO example calculation with my SNPs in excel file, use same format as they can use below.
+For example, see the following example calculation:
+https://docs.google.com/spreadsheets/d/1aP4OQdNsBj7gN5v_Hb40VFV3zgToDPMvGTFQYD6yHwg/edit?usp=sharing
+
+and in a format that might be slightly more useful for the exercise below:
+https://docs.google.com/spreadsheets/d/1dmup-_Nwrs8r7TfBMojnVJewqWdvrc3IcEPmXScZVjY/edit?usp=sharing
+
+<blockquote>
+ **NOT UNIX TIP!** You can do *a lot* with spreadsheets! Although some bioinformaticians might say this is not cool, I think Excel is a great resource especially for working out how to do certain calculations. Please take a chance to look around at this spreadsheet and see how the different fields were calculated.
+</blockquote>
 
 For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these 6 variants for our samples can be found in the `public/week5` directory:
 
