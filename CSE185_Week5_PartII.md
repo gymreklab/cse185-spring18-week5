@@ -42,11 +42,12 @@ https://docs.google.com/spreadsheets/d/1dmup-_Nwrs8r7TfBMojnVJewqWdvrc3IcEPmXScZ
 For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these 6 variants for our samples can be found in the `public/week5` directory:
 
 ```
-TODO filename
+lab5_pred_eyecolor.vcf.gz
 ```
 
 We've seen VCF files in the first couple weeks. But let's take a second to remind ourselves what's going on here and point out a couple of important fields
-TODO example fields in VCF, questions about the VCF for methods section
+
+**TODO example fields in VCF, questions about the VCF for methods section**
 
 Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following command to create a file with one row per sample and one column per SNP:
 
