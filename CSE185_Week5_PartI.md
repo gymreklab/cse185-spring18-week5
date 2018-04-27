@@ -57,6 +57,7 @@ clump with plink
 compare with irisplex snps
 
 Previously, the following SNPs have been associated with eye color:
+
 | chrom | start | rsid | Minor allele |
 |----------|----------|-------|------|
 | 15 | 28365618 | rs12913832 | A |
