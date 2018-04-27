@@ -12,7 +12,7 @@ For our GWAS, we've gone out and collected DNA samples and recorded eye color fo
 Today we'll primarily be using the [Plink](https://www.cog-genomics.org/plink2) package, which is a general toolkit for doing all kinds of operations on genetic datasets. Before we dive into GWAS, let's get familiar with the types of files used by `plink`. Almost every `plink` command takes `--file` as an argument, which gives a prefix to the following files:
 You should see these files:
 
-* `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant as 0, 1, or 2 depending if the sample i homozyous for the reference allele, heterozygous, or homozygous for the alternate allele.
+* `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant as 0, 1, or 2 depending if the sample is homozyous for the reference allele, heterozygous, or homozygous for the alternate allele.
 * `$PREFIX.map`: This file describes the variants whose genotypes are given in the `.ped` file. It has four columns: chromosome, SNP ID, position in centimorgans (or 0 if ignored), and genomic position.
 * `$PREFIX.fam`: Same as the first 6 columns of the `.ped` file.
 
@@ -34,7 +34,19 @@ Record the commands you used to determine this in your lab notebook. Note the re
 Pop structure PCA and plot
 
 ## 2. Performing a basic GWAS
-with and without pop structure covars?
+
+Now, we'll use `plink` to perform our GWAS. The following command performs a basic case-control GWAS using logistic regression:
+```
+plink \
+      --file PATH_TO/lab5_merged \
+      --pheno PATH_TO/lab5_merged.phen \
+      --out $OUTPREFIX \
+      --logistic \
+      --allow-no-sex
+```
+Note you'll have to fill in absolute paths.
+
+Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above.
 
 ## 3. Visualizing GWAS results
 QQ plot
@@ -44,9 +56,17 @@ manhattan plot
 clump with plink
 compare with irisplex snps
 
-Previously, the following SNPs have been associated with eye color. Do any of these show up in your results? If not, discuss in your lab report why you might not have been able to identify them.
+Previously, the following SNPs have been associated with eye color:
+| chrom | start | rsid | Minor allele |
+|----------|----------|-------|------|
+| 15 | 28365618 | rs12913832 | A |
+| 15 | 28230318 | rs1800407 | T |
+| 14 | 92773663 | rs12896399 | G |
+| 5 | 33951693 | rs16891982 | C |
+| 11 | 89011046 | rs1393350 | A |
+| 6 | 396321 | rs12203592 | T |
 
-
+Do any of these show up in your results? If not, discuss in your lab report why you might not have been able to identify them. We'll use this set of SNPs on Thursday to predict eye color in samples where the answer is unknown.
 
 **That's it for today. Next time, we'll use GWAS hits to predict eye color in an independent sample of individuals.**
 
