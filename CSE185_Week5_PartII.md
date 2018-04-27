@@ -8,11 +8,15 @@ We will use a set of SNPs previously published in the [IrisPlex paper](https://w
 ## 5. Eye color prediction model and data
 The IrisPlex paper has fit the following two models, which can be thought of as performing two separate case control analyses: one of blue vs. brown, and the second of other vs. brown.
 
-TODO write model and define terms
+<a href="https://www.codecogs.com/eqnedit.php?latex=\ln(p_{blue}/p_{brown})&space;=&space;\alpha_1&space;&plus;&space;\sum_{k}\beta_{1,&space;k}X_k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ln(p_{blue}/p_{brown})&space;=&space;\alpha_1&space;&plus;&space;\sum_{k}\beta_{1,&space;k}X_k" title="\ln(p_{blue}/p_{brown}) = \alpha_1 + \sum_{k}\beta_{1, k}X_k" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\ln(p_{other}/p_{brown})&space;=&space;\alpha_2&space;&plus;&space;\sum_{k}\beta_{2,&space;k}X_k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ln(p_{other}/p_{brown})&space;=&space;\alpha_2&space;&plus;&space;\sum_{k}\beta_{2,&space;k}X_k" title="\ln(p_{other}/p_{brown}) = \alpha_2 + \sum_{k}\beta_{2, k}X_k" /></a>
+
+where $\alpha_i$ is the intercept term, $\beta_{i,k}$ is the effect size for model $i$ at the $k$th SNP, and $X_k$ is the number of minor alleles at an individuals genotype for the $k$th SNP (0, 1, or 2). Rearranging these allows us to predict the probability of each class of eye color:
 
 We can rearrange this model to predict the probability of each eye color for a given individual:
 
-TODO write model
+<a href="https://www.codecogs.com/eqnedit.php?latex=p_{blue}&space;=&space;\frac{e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}}{1&plus;e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}&plus;e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}&space;\\\\&space;p_{other}&space;=&space;\frac{e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}{1&plus;e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}&plus;e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}&space;\\\\&space;p_{brown}&space;=&space;1-p_{blue}-p_{other}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p_{blue}&space;=&space;\frac{e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}}{1&plus;e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}&plus;e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}&space;\\\\&space;p_{other}&space;=&space;\frac{e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}{1&plus;e^{\alpha_1&space;&plus;&space;\sum_k&space;\beta_{1,k}X_k}&plus;e^{\alpha_2&space;&plus;&space;\sum_k&space;\beta_{2,k}X_k}}&space;\\\\&space;p_{brown}&space;=&space;1-p_{blue}-p_{other}" title="p_{blue} = \frac{e^{\alpha_1 + \sum_k \beta_{1,k}X_k}}{1+e^{\alpha_1 + \sum_k \beta_{1,k}X_k}+e^{\alpha_2 + \sum_k \beta_{2,k}X_k}} \\\\ p_{other} = \frac{e^{\alpha_2 + \sum_k \beta_{2,k}X_k}}{1+e^{\alpha_1 + \sum_k \beta_{1,k}X_k}+e^{\alpha_2 + \sum_k \beta_{2,k}X_k}} \\\\ p_{brown} = 1-p_{blue}-p_{other}" /></a>
 
 Below is a reproduced table of the model parameters from the 6 predictive SNPs, converted to hg19 coordinates:
 
@@ -25,7 +29,7 @@ Below is a reproduced table of the model parameters from the 6 predictive SNPs, 
 | 11 | 89011046 | rs1393350 | A |
 | 6 | 396321 | rs12203592 | T |
 
-For example, TODO example calculation with my SNPs in excel file, use same format as they can use below
+For example, TODO example calculation with my SNPs in excel file, use same format as they can use below.
 
 For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these 6 variants for our samples can be found in the `public/week5` directory:
 
