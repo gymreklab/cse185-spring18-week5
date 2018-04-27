@@ -15,6 +15,7 @@ We can rearrange this model to predict the probability of each eye color for a g
 TODO write model
 
 Below is a reproduced table of the model parameters from the 6 predictive SNPs, converted to hg19 coordinates:
+
 | chrom | start | rsid | Minor allele |
 |----------|----------|-------|------|
 | 15 | 28365618 | rs12913832 | A |
