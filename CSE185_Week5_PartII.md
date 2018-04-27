@@ -80,10 +80,7 @@ Calculate the mean probability of blue, brown, or other colored eyes for each po
 
 ## 8. Variant interpretation
 
-Now, we'd like to understand a little more about what these variants are doing.
-view in IGV
-overlay encode tracks
-TODO
+Now, we'd like to understand a little more about what these variants are doing. Look up these six SNPs using either IGV or the UCSC genome browser (be sure to look at human reference genome build hg19). Where do these SNPs fall? Do you have any hypotheses about how these regions might affect eye color? You may also try loading additional tracks to these browsers, such as histone modifications, to see if these SNPs overlap predicted regulatory regions. Discuss your hypotheses in the lab report.
 
 ## 9. **(Optional, but fun!) Extra credit**
 
