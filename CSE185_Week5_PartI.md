@@ -10,7 +10,6 @@ Today, you'll perform a genome-wide association study (GWAS) for samples with bl
 For our GWAS, we've gone out and collected DNA samples and recorded eye color for a cohort of samples. We've analyzed our samples using a SNP genotype array and cleaned our dataset to remove duplicated samples and problematic markers. We're ready to conduct our GWAS using the cleaned dataset which can be found in the `public/week5` directory with prefix `lab5_gwas_eyecolor`.
 
 Today we'll primarily be using the [plink](https://www.cog-genomics.org/plink2) package, which is a general toolkit for doing all kinds of operations on genetic datasets. Before we dive into GWAS, let's get familiar with the types of files used by `plink`. Almost every `plink` command takes `--file` as an argument, which gives a prefix to the following files:
-You should see these files:
 
 * `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant as 0, 1, or 2 depending if the sample is homozyous for the reference allele, heterozygous, or homozygous for the alternate allele.
 * `$PREFIX.map`: This file describes the variants whose genotypes are given in the `.ped` file. It has four columns: chromosome, SNP ID, position in centimorgans (or 0 if ignored), and genomic position.
@@ -22,13 +21,15 @@ We have one additional file with phenotype information, which could have alterna
 
 Note since we are not using any family information, we have just used the sample id as the family id.
 
-`plink` alternatively can binary files by specifying `--bfile` for commands instead of `--file`. In that case, you would have `.bed`, `.bim`, and `.fam` files.
+`plink` alternatively can use binary files by specifying `--bfile` for commands instead of `--file`. In that case, you would have `.bed`, `.bim`, and `.fam` files. It is usually a good idea to work with compressed data when possible to save space. Here we have used the text files to give us a chance to look at the file format on the command line more easily.
 
 Take a look at our dataset. Record:
 * How many samples are in our cohort?
 * What is the frequency of brown vs. blue eyes in our samples?
 * How many markers are included in our dataset?
 Record the commands you used to determine this in your lab notebook. Note the results in the methods section of your lab report.
+
+**TODO  UNIX tip on uniq -c
 
 ## 1. Analyzing population structure
 
@@ -43,15 +44,15 @@ plink \
     --out ${OUTRPREFIX}
 ```
 
-This will create an output file `${OUTPREFIX}.eigenvec`, with the value along each principle component for each sample. Make a scatter plot of PC1 vs. PC2. Do you see any distinct clusters of samples? What do you think those clusters correspond to?
+This will create an output file `${OUTPREFIX}.eigenvec`, with the value along each principle component for each sample for each of the first 10 principle components. Make a scatter plot of PC1 vs. PC2. You can make the plot using your favorite method (e.g. Python, R, or even Excel are all fine). Do you see any distinct clusters of samples? What do you think those clusters correspond to?
 
 ## 2. Performing a basic GWAS
 
 Now, we'll use `plink` to perform our GWAS. The following command performs a basic case-control GWAS using logistic regression:
 ```
 plink \
-      --file PATH_TO/lab5_merged \
-      --pheno PATH_TO/lab5_merged.phen \
+      --file PATH_TO/lab5_gwas_eyecolor \
+      --pheno PATH_TO/lab5_gwas_eyecolor.phen \
       --out $OUTPREFIX \
       --logistic \
       --allow-no-sex
@@ -60,9 +61,13 @@ Note you'll have to fill in absolute paths.
 
 Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different $OUTPREFIX each time so you don't overwrite the original results.
 
-These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column.
+These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column. There is one row per variant tested. Note, when run with covariates there will also be an additional line of output for each covariate. Use the script below to pull out only the tests for each genotype for downstream analysis:
 
-In each case, how many variants pass genome-wide significance of p<5*10**-8? Did you get more or fewer significant variants after controlling for covariates?
+```
+cat $OUTPREFIX.assoc.logistic | awk '($5=="ADD")' > $OUTPREFIX.assoc.logistic.no_covars
+```
+
+In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</supp>? Did you get more or fewer significant variants after controlling for covariates?
 
 ## 3. Visualizing GWAS results
 Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A partial script for plotting has been provided in `scripts/gwas_plotter.py`. Modify this script as indicated and use it to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Include the figures in your lab report.
