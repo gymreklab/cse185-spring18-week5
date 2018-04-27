@@ -61,10 +61,10 @@ Note you'll have to fill in absolute paths.
 
 Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different $OUTPREFIX each time so you don't overwrite the original results.
 
-These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column. There is one row per variant tested. Note, when run with covariates there will also be an additional line of output for each covariate. Use the script below to pull out only the tests for each genotype for downstream analysis:
+These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column. There is one row per variant tested. Note, when run with covariates there will also be an additional line of output for each covariate. Use the script below to pull out only the tests for each genotype for downstream analysis (plus keep the header info):
 
 ```
-cat $OUTPREFIX.assoc.logistic | awk '($5=="ADD")' > $OUTPREFIX.assoc.logistic.no_covars
+cat $OUTPREFIX.assoc.logistic | awk '($5=="ADD" || $0~/CHR/)' > $OUTPREFIX.assoc.logistic.no_covars
 ```
 
 In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</sup>? Did you get more or fewer significant variants after controlling for covariates?
