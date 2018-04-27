@@ -46,7 +46,11 @@ plink \
 ```
 Note you'll have to fill in absolute paths.
 
-Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above.
+Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different $OUTPREFIX each time so you don't overwrite the original results.
+
+These commands will create an output file $OUTPREFIX.assoc.logistic. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column.
+
+In each case, how many variants pass genome-wide significance of p<5*10**-8? Did you get more or fewer significant variants after controlling for covariates?
 
 ## 3. Visualizing GWAS results
 QQ plot
@@ -55,6 +59,22 @@ manhattan plot
 ## 4. Analyzing significant hits
 clump with plink
 compare with irisplex snps
+
+You will notice some "high rises" in your Manhattan plot. As we discussed in class, it is unlikely that every variant in that spike is independently associated with eye color. It is far more likely that each spike represents a single causal variant which is correlated with a lot of nearby variants that are actually not contributing at all. We can use `plink` to "clump" variants into likely independent signals:
+
+```
+plink \
+    --file ${PREFIX} \
+    --clump ${OUTPREFIX}.assoc.logistic --clump-field P \
+    --clump-p1 0.0001 \
+    --clump-p2 0.01 \
+    --clump-r2 0.5 \
+    --clump-kb 250 \
+    --out ${OUTPREFIX}
+```
+Take a look at plink documentation to learn what the different parameters mean.
+
+This command will output a table `$OUTPREFIX.clumped` with a format described [here](https://www.cog-genomics.org/plink/1.9/formats#clumped). How many signals were identified? Report significant hits in a table in your lab report. Use IGV, the UCSC Genome Browser, or another means to determine whether each variant falls within a gene. If it does, include the name of the gene in the table.
 
 Previously, the following SNPs have been associated with eye color:
 
