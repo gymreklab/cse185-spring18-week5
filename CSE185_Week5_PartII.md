@@ -49,11 +49,20 @@ We've seen VCF files in the first couple weeks. But let's take a second to remin
 
 **TODO example fields in VCF, questions about the VCF for methods section**
 
-Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following command to create a file with one row per sample and one column per SNP:
+Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following commands to create a file with one row per sample and one column per SNP:
 
 ```
-TODO command
+# Get a header row listing the samples
+bcftools query -l lab5_pred_eyecolor.vcf.gz | datamash transpose | awk '{print "ID\t"$0}' > lab5_pred_eyecolor.tab
+# Extract the ID and sample genotypes for each variant
+bcftools query -f "%ID\t[%TGT\t]\n" final/lab5_pred_eyecolor.vcf.gz | sed 's/|//g' >> lab5_pred_eyecolor.tab
+# Transpose the file
+cat lab5_pred_eyecolor.tab | datamash transpose > lab5_pred_eyecolor_transpose.tab
 ```
+
+**TODO explain command above**
+
+Note, these SNPs are sorted by genomic coordinate, so are not in the same order as the SNPs in the table above or in the example spreadsheets! So you might want to use `awk` to rearrange the columns before moving forward.
 
 ## 6. Eye color prediction
 
