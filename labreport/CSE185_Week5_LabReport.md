@@ -14,11 +14,14 @@
 Break your methods section into subheadings for each of the following topics, with 1 paragraph for each:
 
 ### Dataset description (0.5 pts)
-* Describe our GWAS cohort. How many samples were collected? How many have blue vs. brown eyes? How many markers were genotyped?
+* Describe our GWAS cohort. How many samples were collected? How many have blue vs. brown eyes? How many SNPs were genotyped?
+* Describe the cohort used for eye color prediction. How many samples were included? How many SNPs did we look at?
 
 ### GWAS (1 pt)
 * Describe how you used plink (and which version) to perform the GWAS. How did you control for population structure?
 * How did you "clump" variants into independent signals? Describe the parameters you used for plink.
+
+### Eye color prediction (0.5 pt)
 
 ## Results (2 pts total)
 
@@ -29,6 +32,9 @@ You may have 2-3 paragraphs max for each. Make sure each figure is clearly refer
 * How many variants pass genome-wide significance in the GWAS with and without controlling for population structure? After clumping variants, how many independent signals remain?
 * Include Manhattan plots and QQ plots for each GWAS carried out.
 * Include a table of genome-wide significant results after clumping.
+
+### Eye color prediction (1 pt)
+* Include and reference a supplementary table of results with eye color predictions for each sample
 
 ### Topic 1 (? pt)
 
