@@ -29,26 +29,44 @@ Below is a reproduced table of the model parameters from the 6 predictive SNPs, 
 | 11 | 89011046 | rs1393350 | A |
 | 6 | 396321 | rs12203592 | T |
 
-For example, TODO example calculation with my SNPs in excel file, use same format as they can use below.
+For example, see the following example calculation:
+https://docs.google.com/spreadsheets/d/1aP4OQdNsBj7gN5v_Hb40VFV3zgToDPMvGTFQYD6yHwg/edit?usp=sharing
+
+and in a format that might be slightly more useful for the exercise below:
+https://docs.google.com/spreadsheets/d/1dmup-_Nwrs8r7TfBMojnVJewqWdvrc3IcEPmXScZVjY/edit?usp=sharing
+
+<blockquote>
+ **NOT UNIX TIP!** You can do *a lot* with spreadsheets! Although some bioinformaticians might say this is not cool, I think Excel is a great resource especially for working out how to do certain calculations. Please take a chance to look around at this spreadsheet and see how the different fields were calculated.
+</blockquote>
 
 For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these 6 variants for our samples can be found in the `public/week5` directory:
 
 ```
-TODO filename
+lab5_pred_eyecolor.vcf.gz
 ```
 
 We've seen VCF files in the first couple weeks. But let's take a second to remind ourselves what's going on here and point out a couple of important fields
-TODO example fields in VCF, questions about the VCF for methods section
 
-Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following command to create a file with one row per sample and one column per SNP:
+**TODO example fields in VCF, questions about the VCF for methods section**
+
+Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following commands to create a file with one row per sample and one column per SNP:
 
 ```
-TODO command
+# Get a header row listing the samples
+bcftools query -l lab5_pred_eyecolor.vcf.gz | datamash transpose | awk '{print "ID\t"$0}' > lab5_pred_eyecolor.tab
+# Extract the ID and sample genotypes for each variant
+bcftools query -f "%ID\t[%TGT\t]\n" final/lab5_pred_eyecolor.vcf.gz | sed 's/|//g' >> lab5_pred_eyecolor.tab
+# Transpose the file
+cat lab5_pred_eyecolor.tab | datamash transpose > lab5_pred_eyecolor_transpose.tab
 ```
+
+**TODO explain command above**
+
+Note, these SNPs are sorted by genomic coordinate, so are not in the same order as the SNPs in the table above or in the example spreadsheets! So you might want to use `awk` to rearrange the columns before moving forward.
 
 ## 6. Eye color prediction
 
-Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script.  *Hint*: Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in Excel. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or in this case, spreadsheets) to your Github repository.
+Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script. Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in a spreadsheet. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or spreadsheets) to your Github repository.
 
 For each sample, you should report p(brown), p(blue), and p(other), in addition to a prediction based on what eye color has highest probability for that sample. Include a table of results as a *supplementary file* that you reference from your lab report (do not include the table directly in the report!).
 
@@ -58,14 +76,11 @@ It turns out our sample has a mixture of individuals from two population groups.
 
 Population labels for each sample are given in `public/week5/ceu_tsi_population_labels.txt`.
 
- Calculate the mean probability of blue, brown, or other colored eyes for each population, CEU and TSI. Which group is more likely to have blue eyes? Does this match with what is known about eye color frequencies in those populations?
+Calculate the mean probability of blue, brown, or other colored eyes for each population, CEU and TSI. Which group is more likely to have blue eyes? Does this match with what is known about eye color frequencies in those populations? (Note, not all of these samples has genotyopes, so don't worry if some data is missing).
 
 ## 8. Variant interpretation
 
-Now, we'd like to understand a little more about what these variants are doing.
-view in IGV
-overlay encode tracks
-TODO
+Now, we'd like to understand a little more about what these variants are doing. Look up these six SNPs using either IGV or the UCSC genome browser (be sure to look at human reference genome build hg19). Where do these SNPs fall? Do you have any hypotheses about how these regions might affect eye color? You may also try loading additional tracks to these browsers, such as histone modifications, to see if these SNPs overlap predicted regulatory regions. Keep in mind, that often the SNPs identified by GWAS are not themselves causal variants but might lie nearby truly causal mutations. Discuss your hypotheses in the lab report.
 
 ## 9. **(Optional, but fun!) Extra credit**
 
@@ -77,5 +92,6 @@ Based on the fact that each child will inherit one allele from mom and one from 
 
 
 ## 10. For your lab report
+Similar to last week, the lab report document contains specific prompts that should be answered.
 
 **Congrats, you made it to the end of lab 5! This will be our last full lab report before the final project. Next week's lab will just require answering a series of questions to give you a break before we head into final project mode.**
