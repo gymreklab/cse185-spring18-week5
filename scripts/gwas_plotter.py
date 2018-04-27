@@ -5,6 +5,11 @@ Modify this script to make QQ plots and Manhattan plots for your GWAS results!
 
 Usage:
 ./gwas_plotter.py <plink.assoc file> <outprefix>
+
+Plink association file is a fixed width file as output from --logistic, --linear, or --assoc
+Output files:
+  <outprefix>_manhattan.png
+  <outprefix>_qq.png
 """
 
 import sys
@@ -70,5 +75,5 @@ qqplot([data["P"]],
        distribution='beta',
        title='')
 
-plt.savefig('%s_.png'%prefix, dpi=300)
+plt.savefig('%s_qq.png'%prefix, dpi=300)
 

@@ -70,9 +70,9 @@ cat $OUTPREFIX.assoc.logistic | awk '($5=="ADD" || $0~/CHR/)' > $OUTPREFIX.assoc
 In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</sup>? Did you get more or fewer significant variants after controlling for covariates?
 
 ## 3. Visualizing GWAS results
-Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A partial script for plotting has been provided in `scripts/gwas_plotter.py`. Modify this script as indicated and use it to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Include the figures in your lab report.
+Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A script for plotting has been provided in `scripts/gwas_plotter.py`. Figure out how to run this script to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Hint, it is always a good idea to run a script with no arguments to see if there are any hints on how to use it (e.g. `./scripts/gwas_plotter.py`)
 
-How did the two results differ? Which GWAS do you think is more reliable?
+Include the figures in your lab report. How did the two results differ? Which GWAS do you think is more reliable?
 
 ## 4. Analyzing significant hits
 
