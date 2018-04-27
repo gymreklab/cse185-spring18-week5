@@ -13,7 +13,8 @@
 
 Break your methods section into subheadings for each of the following topics, with 1 paragraph for each:
 
-### Topic 1 (? pt)
+### Dataset description (0.5 pts)
+Describe our GWAS cohort. How many samples were collected? How many have blue vs. brown eyes? How many markers were genotyped?
 
 ## Results (2 pts total)
 
