@@ -58,7 +58,19 @@ Population labels for each sample are given in `public/week5/ceu_tsi_population_
 
 ## 8. Variant interpretation
 
+Now, we'd like to understand a little more about what these variants are doing.
+view in IGV
+overlay encode tracks
+TODO
+
 ## 9. **(Optional, but fun!) Extra credit**
+
+For extra credit, we can use what we learned about eye color to predict what eye color a child will have based on the genotypes of the parents.
+
+This spreadsheet gives example genotypes for two parents at each of these six SNPs: TODO
+
+Based on the fact that each child will inherit one allele from mom and one from dad, figure out all possible sets of SNP genotypes for a child.
+
 
 ## 10. For your lab report
 

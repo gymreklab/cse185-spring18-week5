@@ -7,9 +7,9 @@ Today, you'll perform a genome-wide association study (GWAS) for samples with bl
 
 ## 0. Introduction to plink
 
-For our GWAS, we've gone out and collected DNA samples and recorded eye color for a cohort of samples. We've analyzed our samples using a SNP genotype array and cleaned our dataset to remove duplicated samples and problematic markers. We're ready to conduct our GWAS using the cleaned dataset which can be found in the `public/week5` directory with prefix `lab5_merged`.
+For our GWAS, we've gone out and collected DNA samples and recorded eye color for a cohort of samples. We've analyzed our samples using a SNP genotype array and cleaned our dataset to remove duplicated samples and problematic markers. We're ready to conduct our GWAS using the cleaned dataset which can be found in the `public/week5` directory with prefix `lab5_gwas_eyecolor`.
 
-Today we'll primarily be using the [Plink](https://www.cog-genomics.org/plink2) package, which is a general toolkit for doing all kinds of operations on genetic datasets. Before we dive into GWAS, let's get familiar with the types of files used by `plink`. Almost every `plink` command takes `--file` as an argument, which gives a prefix to the following files:
+Today we'll primarily be using the [plink](https://www.cog-genomics.org/plink2) package, which is a general toolkit for doing all kinds of operations on genetic datasets. Before we dive into GWAS, let's get familiar with the types of files used by `plink`. Almost every `plink` command takes `--file` as an argument, which gives a prefix to the following files:
 You should see these files:
 
 * `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant as 0, 1, or 2 depending if the sample is homozyous for the reference allele, heterozygous, or homozygous for the alternate allele.
