@@ -30,7 +30,7 @@ You may have 2-3 paragraphs max for each. Make sure each figure is clearly refer
 
 ### GWAS (1 pt)
 * How many variants pass genome-wide significance in the GWAS with and without controlling for population structure? After clumping variants, how many independent signals remain?
-* Include Manhattan plots and QQ plots for each GWAS carried out.
+* Include Manhattan plots and QQ plots for each GWAS carried out and compare the results with and without controlling for population structure.
 * Include a table of genome-wide significant results after clumping.
 
 ### Eye color prediction (1 pt)

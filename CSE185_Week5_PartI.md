@@ -72,7 +72,7 @@ In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</
 ## 3. Visualizing GWAS results
 Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A script for plotting has been provided in `scripts/gwas_plotter.py`. Figure out how to run this script to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Hint, it is always a good idea to run a script with no arguments to see if there are any hints on how to use it (e.g. `python ./scripts/gwas_plotter.py`)
 
-Include the figures in your lab report. How did the two results differ? Which GWAS do you think is more reliable? **Choose that one for the remainder of analyses.**
+Include the figures in your lab report. How did the two results differ? Which GWAS do you think is more reliable and why? **Choose that one for the remainder of analyses.**
 
 ## 4. Analyzing significant hits
 
