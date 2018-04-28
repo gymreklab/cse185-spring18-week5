@@ -84,12 +84,18 @@ Now, we'd like to understand a little more about what these variants are doing. 
 
 ## 9. **(Optional, but fun!) Extra credit**
 
-For extra credit, we can use what we learned about eye color to predict what eye color a child will have based on the genotypes of the parents.
+For extra credit, we can use what we learned about eye color to predict what eye color a child will have based on following parent genotypes:
 
-This spreadsheet gives example genotypes for two parents at each of these six SNPs: TODO
+| chrom | start | rsid | Minor allele | Mother Genotype | Father Genotype |
+|----------|----------|-------|------|--------|--------|
+| 15 | 28365618 | rs12913832 | A | GG | AG |
+| 15 | 28230318 | rs1800407 | T | CC | CC |
+| 14 | 92773663 | rs12896399 | G | GG | GT |
+| 5 | 33951693 | rs16891982 | C | GG | GG |
+| 11 | 89011046 | rs1393350 | A |GA | GA |
+| 6 | 396321 | rs12203592 | T | CC | CC |
 
-Based on the fact that each child will inherit one allele from mom and one from dad, figure out all possible sets of SNP genotypes for a child.
-
+Based on the fact that each child will inherit one allele from mom and one from dad, figure out all possible sets of SNP genotypes for a child. What is the probability the child will have blue eyes?
 
 ## 10. For your lab report
 Similar to last week, the lab report document contains specific prompts that should be answered.

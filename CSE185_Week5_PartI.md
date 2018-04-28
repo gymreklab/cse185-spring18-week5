@@ -90,7 +90,7 @@ plink \
 ```
 Take a look at plink documentation to learn what the different parameters mean.
 
-This command will output a table `$OUTPREFIX.clumped` with a format described [here](https://www.cog-genomics.org/plink/1.9/formats#clumped). How many signals were identified? Report significant hits in a table in your lab report. Use IGV, the UCSC Genome Browser, or another means to determine whether each variant falls within a gene. If it does, include the name of the gene in the table.
+This command will output a table `$OUTPREFIX.clumped` with a format described [here](https://www.cog-genomics.org/plink/1.9/formats#clumped). How many signals were identified? Report significant hits (meeting genome-wide significance) in a table in your lab report. Use IGV, the UCSC Genome Browser, or another means to determine whether each variant falls within a gene. If it does, include the name of the gene in the table.
 
 Previously, the following SNPs have been associated with eye color:
 
@@ -103,6 +103,7 @@ Previously, the following SNPs have been associated with eye color:
 | 11 | 89011046 | rs1393350 | A |
 | 6 | 396321 | rs12203592 | T |
 
-Do any of these show up in your results? If not, discuss in your lab report why you might not have been able to identify them. We'll use this set of SNPs on Thursday to predict eye color in samples where the answer is unknown.
+Do any of these show up in your results? If not, what p-values did you calculate for each one?
+Discuss in your lab report why you might not have been able to identify them. We'll use this set of SNPs on Thursday to predict eye color in samples where the answer is unknown.
 
 **That's it for today. Next time, we'll use GWAS hits to *predict* eye color given an individual's genotypes!**
