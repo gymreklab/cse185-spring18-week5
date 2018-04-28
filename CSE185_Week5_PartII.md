@@ -88,12 +88,12 @@ For extra credit, we can use what we learned about eye color to predict what eye
 
 | chrom | start | rsid | Minor allele | Mother Genotype | Father Genotype |
 |----------|----------|-------|------|--------|--------|
-| 15 | 28365618 | rs12913832 | A | GG | |
-| 15 | 28230318 | rs1800407 | T | CC | |
-| 14 | 92773663 | rs12896399 | G | GG | |
-| 5 | 33951693 | rs16891982 | C | GG | |
-| 11 | 89011046 | rs1393350 | A |GA | |
-| 6 | 396321 | rs12203592 | T | CC | |
+| 15 | 28365618 | rs12913832 | A | GG | AG |
+| 15 | 28230318 | rs1800407 | T | CC | CC |
+| 14 | 92773663 | rs12896399 | G | GG | GT |
+| 5 | 33951693 | rs16891982 | C | GG | GG |
+| 11 | 89011046 | rs1393350 | A |GA | GA |
+| 6 | 396321 | rs12203592 | T | CC | CC |
 
 Based on the fact that each child will inherit one allele from mom and one from dad, figure out all possible sets of SNP genotypes for a child. What is the probability the child will have blue eyes?
 
