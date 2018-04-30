@@ -11,7 +11,7 @@ For our GWAS, we've gone out and collected DNA samples and recorded eye color fo
 
 Today we'll primarily be using the [plink](https://www.cog-genomics.org/plink2) package, which is a general toolkit for doing all kinds of operations on genetic datasets. Before we dive into GWAS, let's get familiar with the types of files used by `plink`. Almost every `plink` command takes `--file` as an argument, which gives a prefix to the following files:
 
-* `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant as 0, 1, or 2 depending if the sample is homozyous for the reference allele, heterozygous, or homozygous for the alternate allele.
+* `$PREFIX.ped`: This file contains all the genotype information. There is one row per individual. The columns are described [here](https://www.cog-genomics.org/plink/1.9/formats#ped). There are 2V+6 fields, where V is the number of variants. The first 6 columns contain: sample id, family id, id of father (if known), id of mother (if known), sex code, and phenotype value. Each column after that gives the genotype for each variant in each sample. There are two columns giving the two alleles of each sample. Here, 1=reference allele, 2=alternate allele, and 0=missing genotype (this is a little bit different notation than the examples we had in class).
 * `$PREFIX.map`: This file describes the variants whose genotypes are given in the `.ped` file. It has four columns: chromosome, SNP ID, position in centimorgans (or 0 if ignored), and genomic position.
 * `$PREFIX.fam`: Same as the first 6 columns of the `.ped` file.
 
@@ -38,7 +38,7 @@ Record the commands you used to determine this in your lab notebook. Note the re
 
 ## 1. Analyzing population structure
 
-It turns out our sample was collected from individuals with quite different ethnic backgrounds. For example, some are European, others are Asian, and some are African. As we will learn in class on Wednesday, using such a heterogenous sample may introduce spurious signals in our GWAS. We'd like to control for population structure in our cohort. For this, we'll use something called Principle Component Analysis (PCA). PCA looks for groups of features (in this case, SNPs) that explain the most variation in our data. You can think of it as clustering our samples based on their ancestry. We'll use the results of this clustering as covariates in our GWAS. If this is confusing, revisit this section after Wednesday's lecture!
+It turns out our sample was collected from individuals with different ethnic backgrounds. As we will learn in class on Wednesday, using a heterogenous sample may introduce spurious signals in our GWAS. We'd like to control for population structure in our cohort. For this, we'll use something called Principle Component Analysis (PCA). PCA looks for groups of features (in this case, SNPs) that explain the most variation in our data. You can think of it as clustering our samples based on their ancestry. We'll use the results of this clustering as covariates in our GWAS. If this is confusing, revisit this section after Wednesday's lecture!
 
 We can use `plink` to calculate principle components in our sample:
 
@@ -64,7 +64,7 @@ plink \
 ```
 Note you'll have to fill in absolute paths.
 
-Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. (Note: the parameter to include the covariates in the analysis, yet remove covariate-specific lines from the output results report.) Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different $OUTPREFIX each time so you don't overwrite the original results.
+Look at the [`plink` documentation](https://www.cog-genomics.org/plink/1.9/assoc#linear) to learn how to add covariates to our analysis. (Note: the parameter to include the covariates in the analysis, yet remove covariate-specific lines from the output results report.) Run the GWAS twice: once with no covariates and once controlling for population structure using the PCs generated above. Be sure to use a different `$OUTPREFIX` each time so you don't overwrite the original results.
 
 These commands will create an output file `$OUTPREFIX.assoc.logistic`. See the [plink documentation](https://www.cog-genomics.org/plink/1.9/formats#assoc_linear) for a description of each column. There is one row per variant tested. Note, when run with covariates there will also be an additional line of output for each covariate, described under the "Test" column. Use the script below to pull out only the tests for each genotype for downstream analysis (plus keep the header info):
 
@@ -78,6 +78,8 @@ In each case, how many variants pass genome-wide significance of p<5*10<sup>-8</
 Now, we'd like to visualize our results. We will use the [`assocplots`](https://github.com/khramts/assocplots) python package for this.  A script for plotting has been provided in `scripts/gwas_plotter.py`. Figure out how to run this script to generate QQ plots and Manhattan plots for each GWAS you performed (with and without covariates). Hint, it is always a good idea to run a script with no arguments to see if there are any hints on how to use it (e.g. `python ./scripts/gwas_plotter.py`)
 
 Include the figures in your lab report. How did the two results differ? Which GWAS do you think is more reliable and why? **Choose that one for the remainder of analyses.**
+
+*Hint*: Take a look at Box 2 in the required reading assignment for more info on how to interpret QQ plots.
 
 ## 4. Analyzing significant hits
 
