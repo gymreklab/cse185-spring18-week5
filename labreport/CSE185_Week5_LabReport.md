@@ -8,6 +8,7 @@
 2-3 paragraphs max
 * What question(s) sare we trying to answer?
 * Why is this question important?
+* What did you do here to answer this question
 
 ## Methods (2 pts total)
 
