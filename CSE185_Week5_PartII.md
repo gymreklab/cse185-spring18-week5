@@ -53,7 +53,7 @@ Before we move on to predicting eye color, let's convert this VCF file into a fo
 
 ```
 # Get a header row listing the samples
-bcftools query -l lab5_pred_eyecolor.vcf.gz | datamash transpose | awk '{print "ID\t"$0}' > lab5_pred_eyecolor.tab
+bcftools query -l lab5_pred_eyecolor.vcf.gz | datamash transpose | awk '{print "ID\t"$0"\t"}' > lab5_pred_eyecolor.tab
 # Extract the ID and sample genotypes for each variant
 bcftools query -f "%ID\t[%TGT\t]\n" final/lab5_pred_eyecolor.vcf.gz | sed 's/|//g' >> lab5_pred_eyecolor.tab
 # Transpose the file
