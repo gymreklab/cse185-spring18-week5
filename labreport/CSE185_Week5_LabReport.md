@@ -22,6 +22,8 @@ Break your methods section into subheadings for each of the following topics, wi
 * How did you "clump" variants into independent signals? Describe the parameters you used for plink.
 
 ### Eye color prediction (0.5 pt)
+* What method did you use to compute eye color (e.g. script? excel spreadsheet?)
+* Describe any additional methods or datasets you used to interpret what the variants might be doing.
 
 ## Results (2 pts total)
 
@@ -37,9 +39,8 @@ You may have 2-3 paragraphs max for each. Make sure each figure is clearly refer
 * Include and reference a supplementary table of results with eye color predictions for each sample
 * Include at least one genome browser screenshot of one of the six eye color SNPs and your interpretation of how that SNP might be affecting eye color.
 
-### Topic 1 (? pt)
-
 ## Discussion (2 pts)
+* What affect did controlling for population structure have on your results?
 * Did you identify all the known SNPs contributing to eye color? If not, why do you think you might have missed them?
 * Hypothesize how the 6 SNPs used in Part II might be affecting eye color. 
 
