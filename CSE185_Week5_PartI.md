@@ -38,7 +38,7 @@ Record the commands you used to determine this in your lab notebook. Note the re
 
 ## 1. Analyzing population structure
 
-It turns out our sample was collected from individuals with different ethnic backgrounds. As we will learn in class on Wednesday, using a heterogenous sample may introduce spurious signals in our GWAS. We'd like to control for population structure in our cohort. For this, we'll use something called Principle Component Analysis (PCA). PCA looks for groups of features (in this case, SNPs) that explain the most variation in our data. You can think of it as clustering our samples based on their ancestry. We'll use the results of this clustering as covariates in our GWAS. If this is confusing, revisit this section after Wednesday's lecture!
+It turns out our sample was collected from individuals with different ethnic backgrounds. As we will learn in class on Wednesday, using a heterogenous sample may introduce spurious signals in our GWAS. We'd like to control for population structure in our cohort. For this, we'll use something called Principal Component Analysis (PCA). PCA looks for groups of features (in this case, SNPs) that explain the most variation in our data. You can think of it as clustering our samples based on their ancestry. We'll use the results of this clustering as covariates in our GWAS. If this is confusing, revisit this section after Wednesday's lecture!
 
 We can use `plink` to calculate principle components in our sample:
 
@@ -49,7 +49,7 @@ plink \
     --out ${OUTRPREFIX}
 ```
 
-This will create an output file `${OUTPREFIX}.eigenvec`, with the value along each principle component for each sample for each of the first 10 principle components. Make a scatter plot of PC1 vs. PC2. You can make the plot using your favorite method (e.g. Python, R, or even Excel are all fine). Do you see any distinct clusters of samples? What do you think those clusters correspond to?
+This will create an output file `${OUTPREFIX}.eigenvec`, with the value along each principal component for each sample for each of the first 10 principle components. Make a scatter plot of PC1 vs. PC2. You can make the plot using your favorite method (e.g. Python, R, or even Excel are all fine). Do you see any distinct clusters of samples? What do you think those clusters correspond to?
 
 ## 2. Performing a basic GWAS
 
