@@ -30,7 +30,8 @@ Take a look at our dataset. Record:
 Record the commands you used to determine this in your lab notebook. Note the results in the methods section of your lab report.
 
 <blockquote>
-**UNIX TIP**: In order to count the number of cases and controls in your dataset, you can use unix command `uniq -c`. When applied to a **sorted list**, this command finds the unique values and number of occurence of each value in that list. In order to generate a list of phenotypes, you can apply `cat $file | cut -fN` to isolate the `N`'th column of a file. Use the following template to count the number of cases and controls: 
+**UNIX TIP**: In order to count the number of cases and controls in your dataset, you can use unix command `uniq -c`. When applied to a **sorted list**, this command finds the unique values and number of occurence of each value in that list. In order to generate a list of phenotypes, you can use `cat $file | cut -fN` to isolate the `N`'th column of a file. Use the following template to count the number of cases and controls:
+    
     `cat $file | cut -fN | sort | uniq -c`
     
 </blockquote>
