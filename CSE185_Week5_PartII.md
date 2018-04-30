@@ -22,7 +22,7 @@ at the
 <a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>
 th SNP, and 
 <a href="https://www.codecogs.com/eqnedit.php?latex=X_k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X_k" title="X_k" /></a> 
-is the number of minor alleles at an individuals genotype for the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>th SNP (0, 1, or 2). 
+is the number of minor alleles at an individual's genotype for the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>th SNP (0, 1, or 2). 
 
 We can rearrange this model to predict the probability of each eye color for a given individual:
 
@@ -42,22 +42,23 @@ Below is a reproduced table of the model parameters from the 6 predictive SNPs, 
 For example, see the following example calculation:
 https://docs.google.com/spreadsheets/d/1aP4OQdNsBj7gN5v_Hb40VFV3zgToDPMvGTFQYD6yHwg/edit?usp=sharing
 
-and in a format that might be slightly more useful for the exercise below:
-https://docs.google.com/spreadsheets/d/1dmup-_Nwrs8r7TfBMojnVJewqWdvrc3IcEPmXScZVjY/edit?usp=sharing
-
 <blockquote>
- **NOT UNIX TIP!** You can do *a lot* with spreadsheets! Although some bioinformaticians might say this is not cool, I think Excel is a great resource especially for working out how to do certain calculations. Please take a chance to look around at this spreadsheet and see how the different fields were calculated.
+ **NOT UNIX TIP!** You can do *a lot* with spreadsheets! Although some bioinformaticians might say this is not cool, I think Excel is a great resource especially for working out how to do certain calculations. Please take a chance to look around at this spreadsheet and see how the different fields were calculated. You can actually do all of the rest of this assignment in Excel with some clever rearranging of the fields in the spreadsheet above!
 </blockquote>
 
-For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these 6 variants for our samples can be found in the `public/week5` directory:
+For this part of the lab, we'll be working with a smaller set of samples independent from our original GWAS. A VCF file containing these variants for our samples can be found in the `public/week5` directory:
 
 ```
 lab5_pred_eyecolor.vcf.gz
 ```
 
-We've seen VCF files in the first couple weeks. But let's take a second to remind ourselves what's going on here and point out a couple of important fields
+We've seen VCF files in the first couple weeks. But let's take a second to remind ourselves what's going on here and point out a couple of important fields. Recall:
 
-**TODO example fields in VCF, questions about the VCF for methods section**
+* Lines at the top beginning with `#` give header info. The last line of the header gives headers for the different columns describing each variant (columns 1-9), plus one column for each sample in our dataset (columns 10+).
+* Each row is for a single variant. Columns 10+ give the genotype (plus other info) for each sample at each position. 
+* Note the `ID` columns, which corresponds to the same [dbSNP](https://www.ncbi.nlm.nih.gov/projects/SNP/) rsids given in the table above. Also note the `REF` and `ALT` columns giving the two different alleles at each locus.
+
+Use UNIX commands we've learned in class to determine (1) the number of variants and (2) the number of samples contained in this VCF file. Record your commands in your lab notebook and report the answers in the methods section of your lab report.
 
 Before we move on to predicting eye color, let's convert this VCF file into a format that will be easier for us to process. Use the following commands to create a file with one row per sample and one column per SNP:
 
@@ -70,9 +71,26 @@ bcftools query -f "%ID\t[%TGT\t]\n" final/lab5_pred_eyecolor.vcf.gz | sed 's/|//
 cat lab5_pred_eyecolor.tab | datamash transpose > lab5_pred_eyecolor_transpose.tab
 ```
 
+Let's break down these commands. You should also run these one at a time to get a good idea of what each command is doing.
+
+1. The first command gets a header for our file, consisting of "ID" and the name of each sample. There are two really useful tools here:
+
+* `bcftools query` can be used to wrangle a VCF file into pretty much any format you want. Here, we used `-l` to simply list the samples present in the VCF file. Using the `-f` option (below), we can output the fields in any way we want.
+* `datamash transpose` will *transpose* a file. That is, it makes the rows into columns and columns into rows. So the input here was a list of one sample per line. Transposing that gives us a single row with one sample per column.
+
+The final `awk` command just appends "ID" as the first column. Note, in awk `$0` refers to the entire line that was input.
+
+2. The second command extracts the genotypes for each sample at each variant.
+
+* `bcftools query` is now being used to output genotype info in a specified format. We used `-f` to tell it how we want things output. `%<fieldname` refers to a VCF field. So `%ID` means output the `ID` column for each line. Anything in brackets (`[]`) is output *per sample*. So `[%TGT\t]` means to print the genotype of each sample separated by tabs. Read more about `bcftools query` [here](https://samtools.github.io/bcftools/bcftools-man.html#query).
+* `sed`, like `awk`, is very useful for manipulating text on the command line. Here, we used `sed` to "find and replace" using the syntax `sed 's/<find>/<replace>/g'` to remove all the `|` characters.
+
+3. We used `datamash transpose` again to get a file with one row per sample and one column per SNP.
+
+
 **TODO explain command above**
 
-Note, these SNPs are sorted by genomic coordinate, so are not in the same order as the SNPs in the table above or in the example spreadsheets! So you might want to use `awk` to rearrange the columns before moving forward.
+Note, these SNPs are sorted by genomic coordinate, so are not in the same order as the SNPs in the table above or in the example spreadsheet! You might want to use `awk` to rearrange the columns before moving forward.
 
 ## 6. Eye color prediction
 
