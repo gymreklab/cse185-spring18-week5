@@ -12,7 +12,17 @@ The IrisPlex paper has fit the following two models, which can be thought of as 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\ln(p_{other}/p_{brown})&space;=&space;\alpha_2&space;&plus;&space;\sum_{k}\beta_{2,&space;k}X_k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\ln(p_{other}/p_{brown})&space;=&space;\alpha_2&space;&plus;&space;\sum_{k}\beta_{2,&space;k}X_k" title="\ln(p_{other}/p_{brown}) = \alpha_2 + \sum_{k}\beta_{2, k}X_k" /></a>
 
-where $\alpha_i$ is the intercept term, $\beta_{i,k}$ is the effect size for model $i$ at the $k$th SNP, and $X_k$ is the number of minor alleles at an individuals genotype for the $k$th SNP (0, 1, or 2). Rearranging these allows us to predict the probability of each class of eye color:
+where <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha_i" title="\alpha_i" /></a>
+is the intercept term for model
+<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>, 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\beta_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\beta_{i,k}" title="\beta_{i,k}" /></a>
+is the effect size for model 
+<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a> 
+at the 
+<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>
+th SNP, and 
+<a href="https://www.codecogs.com/eqnedit.php?latex=X_k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X_k" title="X_k" /></a> 
+is the number of minor alleles at an individuals genotype for the <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>th SNP (0, 1, or 2). 
 
 We can rearrange this model to predict the probability of each eye color for a given individual:
 
