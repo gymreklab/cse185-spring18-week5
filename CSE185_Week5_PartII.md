@@ -82,19 +82,16 @@ The final `awk` command just appends "ID" as the first column. Note, in awk `$0`
 
 2. The second command extracts the genotypes for each sample at each variant.
 
-* `bcftools query` is now being used to output genotype info in a specified format. We used `-f` to tell it how we want things output. `%<fieldname` refers to a VCF field. So `%ID` means output the `ID` column for each line. Anything in brackets (`[]`) is output *per sample*. So `[%TGT\t]` means to print the genotype of each sample separated by tabs. Read more about `bcftools query` [here](https://samtools.github.io/bcftools/bcftools-man.html#query).
+* `bcftools query` is now being used to output genotype info in a specified format. We used `-f` to tell it how we want things output. `%<fieldname>` refers to a VCF field. So `%ID` means output the `ID` column for each line. Anything in brackets (`[]`) is output *per sample*. So `[%TGT\t]` means to print the genotype of each sample separated by tabs. Read more about `bcftools query` [here](https://samtools.github.io/bcftools/bcftools-man.html#query).
 * `sed`, like `awk`, is very useful for manipulating text on the command line. Here, we used `sed` to "find and replace" using the syntax `sed 's/<find>/<replace>/g'` to remove all the `|` characters.
 
 3. We used `datamash transpose` again to get a file with one row per sample and one column per SNP.
-
-
-**TODO explain command above**
 
 Note, these SNPs are sorted by genomic coordinate, so are not in the same order as the SNPs in the table above or in the example spreadsheet! You might want to use `awk` to rearrange the columns before moving forward.
 
 ## 6. Eye color prediction
 
-Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script. Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in a spreadsheet. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or spreadsheets) to your Github repository.
+Predict the eye color of each sample in our dataset using the model given above. We'll let you decide the best way to do this. For example, you could write a python script. Alternatively, it would be pretty easy to modify the example worked out in the spreadsheet above to do all of this in a spreadsheet with one sample per row. Whichever method you choose, be sure to note in your lab notebook what you did and upload any additional scripts (or spreadsheets) to your Github repository.
 
 For each sample, you should report p(brown), p(blue), and p(other), in addition to a prediction based on what eye color has highest probability for that sample. Include a table of results as a *supplementary file* that you reference from your lab report (do not include the table directly in the report!).
 
@@ -108,9 +105,9 @@ Calculate the mean probability of blue, brown, or other colored eyes for each po
 
 ## 8. Variant interpretation
 
-Now, we'd like to understand a little more about what these variants are doing. Look up these six SNPs using either IGV or the UCSC genome browser (be sure to look at human reference genome build hg19). Where do these SNPs fall? Do you have any hypotheses about how these regions might affect eye color? You may also try loading additional tracks to these browsers, such as histone modifications, to see if these SNPs overlap predicted regulatory regions. Keep in mind, that often the SNPs identified by GWAS are not themselves causal variants but might lie nearby truly causal mutations. Discuss your hypotheses in the lab report.
+Now, we'd like to understand a little more about what these variants are doing. Look up these six SNPs using either IGV or the UCSC genome browser (be sure to look at human reference genome build hg19). Where do these SNPs fall? Are they in protein coding regions? Do you have any hypotheses about how these regions might affect eye color? You may also try loading additional tracks to these browsers, such as histone modifications, to see if these SNPs overlap predicted regulatory regions. Some of these can be directly accessed on IGV by going to "File->Load from Encdoe". Keep in mind, that often the SNPs identified by GWAS are not themselves causal variants but might lie nearby truly causal mutations. Discuss your hypotheses in the lab report.
 
-## 9. **(Optional, but fun!) Extra credit**
+## 9. **(Optional, but fun!) Extra credit (1 pt) **
 
 For extra credit, we can use what we learned about eye color to predict what eye color a child will have based on following parent genotypes:
 
